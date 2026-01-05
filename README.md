@@ -237,34 +237,6 @@ All relationships and indexes implemented as per specification.
 
 ---
 
-## 🧪 Test Mode Support
-
-Environment variables supported:
-
-```env
-TEST_MODE=true
-TEST_PAYMENT_SUCCESS=true
-TEST_PROCESSING_DELAY=1000
-```
-
-Ensures deterministic behavior for evaluation.
-
----
-
-## ✅ Completed Requirements Checklist
-
-- ✅ Dockerized multi-service setup
-- ✅ Merchant authentication
-- ✅ Order creation API
-- ✅ UPI & Card payments
-- ✅ Luhn validation
-- ✅ VPA validation
-- ✅ Hosted checkout page
-- ✅ Payment polling
-- ✅ Database persistence
-- ✅ Test merchant auto-seeding
-- ✅ Required data-test-id attributes
-
 ---
 
 ## 🔗 Important Links
