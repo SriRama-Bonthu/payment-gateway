@@ -1,30 +1,36 @@
-💳 Payment Gateway with Multi-Method Processing & Hosted Checkout
-📌 Project Overview
+# 💳 Payment Gateway with Multi-Method Processing & Hosted Checkout
+
+## 📌 Project Overview
+
 This project implements a mini payment gateway system similar to Razorpay/Stripe. It allows merchants to create payment orders via API and customers to complete payments through a hosted checkout page supporting UPI and Card payments.
+
 The system is fully dockerized, follows REST API standards, and implements payment lifecycle state management, validation logic, and frontend dashboards.
 
-🧱 Tech Stack
-Backend
+---
 
-Node.js + Express.js
-PostgreSQL
-Docker
-REST APIs
+## 🧱 Tech Stack
 
-Frontend
+### Backend
+- Node.js + Express.js
+- PostgreSQL
+- Docker
+- REST APIs
 
-React (Dashboard)
-React (Hosted Checkout Page)
-Nginx (Static hosting)
+### Frontend
+- React (Dashboard)
+- React (Hosted Checkout Page)
+- Nginx (Static hosting)
 
-Tools
+### Tools
+- Docker & Docker Compose
+- Postman / Thunder Client
+- Git & GitHub
 
-Docker & Docker Compose
-Postman / Thunder Client
-Git & GitHub
+---
 
+## 📁 Project Structure
 
-📁 Project Structure
+```
 payment-gateway/
 ├── docker-compose.yml
 ├── README.md
@@ -45,16 +51,21 @@ payment-gateway/
     ├── nginx.conf
     ├── src/
     └── package.json
+```
 
-🚀 How to Run the Project
-1️⃣ Prerequisites
+---
 
-Docker
-Docker Compose
+## 🚀 How to Run the Project
 
-2️⃣ Start All Services
+### 1️⃣ Prerequisites
+- Docker
+- Docker Compose
+
+### 2️⃣ Start All Services
 From root folder:
-bashdocker-compose up -d --build
+
+```bash
+docker-compose up -d --build
 ```
 
 ### 3️⃣ Services & Ports
@@ -72,16 +83,25 @@ bashdocker-compose up -d --build
 ### Endpoint
 ```
 GET /health
-Response
-json{
+```
+
+### Response
+```json
+{
   "status": "healthy",
   "database": "connected",
   "timestamp": "2026-01-05T10:30:00Z"
 }
+```
 
-🧪 Test Merchant (Auto-Seeded)
+---
+
+## 🧪 Test Merchant (Auto-Seeded)
+
 The application auto-seeds a test merchant on startup.
-json{
+
+```json
+{
   "email": "test@example.com",
   "api_key": "key_test_abc123",
   "api_secret": "secret_test_xyz789"
@@ -93,6 +113,7 @@ json{
 ## 🔐 Authentication
 
 All protected APIs require:
+
 ```
 X-Api-Key: key_test_abc123
 X-Api-Secret: secret_test_xyz789
@@ -103,10 +124,14 @@ X-Api-Secret: secret_test_xyz789
 ## 📦 Orders API
 
 ### Create Order
+
 ```
 POST /api/v1/orders
-Request Body:
-json{
+```
+
+**Request Body:**
+```json
+{
   "amount": 50000,
   "currency": "INR",
   "receipt": "receipt_123",
@@ -121,18 +146,26 @@ json{
 ## 💰 Payments API
 
 ### Create Payment (UPI)
+
 ```
 POST /api/v1/payments
-Request Body:
-json{
-  "order_id": "order_xxxxx",
+```
+
+**Request Body:**
+```json
+{
+  "order_id": "order_N5yrsmqWFw1lENAQ",
   "method": "upi",
   "vpa": "user@paytm"
 }
-Create Payment (Card)
-Request Body:
-json{
-  "order_id": "order_xxxxx",
+```
+
+### Create Payment (Card)
+
+**Request Body:**
+```json
+{
+  "order_id": "order_N5yrsmqWFw1lENAQ",
   "method": "card",
   "card": {
     "number": "4111111111111111",
@@ -147,6 +180,7 @@ json{
 ---
 
 ## 🔁 Payment Lifecycle
+
 ```
 processing → success / failed
 ```
@@ -161,7 +195,7 @@ processing → success / failed
 
 ### URL Format
 ```
-http://localhost:3001/checkout?order_id=order_xxxxx
+http://localhost:3001/checkout?order_id=order_N5yrsmqWFw1lENAQ
 ```
 
 ### Features
@@ -178,56 +212,73 @@ http://localhost:3001/checkout?order_id=order_xxxxx
 ### Login Page
 ```
 /login
+```
 Uses test merchant email (password not validated for Deliverable 1).
-Dashboard
 
-Shows API Key & Secret
-Displays:
+### Dashboard
+- Shows API Key & Secret
+- Displays:
+  - Total transactions
+  - Total amount
+  - Success rate
 
-Total transactions
-Total amount
-Success rate
+### Transactions Page
+- Lists all payments with status
 
+---
 
+## 🗄️ Database Tables
 
-Transactions Page
-
-Lists all payments with status
-
-
-🗄️ Database Tables
-
-merchants
-orders
-payments
+- `merchants`
+- `orders`
+- `payments`
 
 All relationships and indexes implemented as per specification.
 
-🧪 Test Mode Support
+---
+
+## 🧪 Test Mode Support
+
 Environment variables supported:
-envTEST_MODE=true
+
+```env
+TEST_MODE=true
 TEST_PAYMENT_SUCCESS=true
 TEST_PROCESSING_DELAY=1000
+```
+
 Ensures deterministic behavior for evaluation.
 
-✅ Completed Requirements Checklist
+---
 
-✅ Dockerized multi-service setup
-✅ Merchant authentication
-✅ Order creation API
-✅ UPI & Card payments
-✅ Luhn validation
-✅ VPA validation
-✅ Hosted checkout page
-✅ Payment polling
-✅ Database persistence
-✅ Test merchant auto-seeding
-✅ Required data-test-id attributes
+## ✅ Completed Requirements Checklist
 
+- ✅ Dockerized multi-service setup
+- ✅ Merchant authentication
+- ✅ Order creation API
+- ✅ UPI & Card payments
+- ✅ Luhn validation
+- ✅ VPA validation
+- ✅ Hosted checkout page
+- ✅ Payment polling
+- ✅ Database persistence
+- ✅ Test merchant auto-seeding
+- ✅ Required data-test-id attributes
 
-🔗 Important Links
+---
 
-Backend API: http://localhost:8000
-Dashboard: http://localhost:3000
-Checkout: http://localhost:3001
-Health: http://localhost:8000/health
+## 🔗 Important Links
+
+- **Backend API:** http://localhost:8000
+- 
+- **Frontend:** http://localhost:3000/login
+- **Login:** http://localhost:3000/login
+- **dashboard:** http://localhost:3000/dashboard
+- **transactions:** http://localhost:3000/dashboard/transactions
+- 
+- **Checkout:** http://localhost:3001
+- 
+- **Health:** http://localhost:8000/health
+
+---
+
